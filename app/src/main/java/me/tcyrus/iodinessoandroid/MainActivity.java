@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
-import java.net.MalformedURLException;
 import java.net.URL;
 
 import edu.tjhsst.tcyrus.iodine.SSO;
@@ -20,12 +20,24 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		try {
-			String url = SSO.SSOUrl("IodineSSOAndroid", new URL("localhost")).toString();
+			String url = SSO.SSOUrl(getString(R.string.app_name), new URL("localhost")).toString();
 			webView = (WebView) findViewById(R.id.webView);
 			webView.getSettings().setJavaScriptEnabled(true);
+			webView.setWebViewClient(new WebViewClient(){
+				@Override
+				public boolean shouldOverrideUrlLoading(WebView view, String url) {
+					try {
+						if (url.contains("localhost")) {
+							String sso = url.split("sso=")[1];
+							webView.loadData(SSO.verifySSO(sso).toString(), "application/json", "UTF-8");
+							return true;
+						}
+					} catch (Exception e) {return false;}
+					return false;
+				}
+			});
 			webView.loadUrl(url);
-		}
-		catch (Exception e) {}
+		} catch (Exception e) {}
 	}
 
 	@Override
