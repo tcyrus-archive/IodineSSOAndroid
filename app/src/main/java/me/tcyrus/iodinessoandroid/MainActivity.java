@@ -2,6 +2,7 @@ package me.tcyrus.iodinessoandroid;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.webkit.WebView;
@@ -20,16 +21,18 @@ public class MainActivity extends ActionBarActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		try {
-			String url = SSO.SSOUrl(getString(R.string.app_name), new URL("localhost")).toString();
+			String url = SSO.SSOUrl(getString(R.string.app_name), new URL("http://1.1.1.1")).toString();
+			Log.d("URL",url);
 			webView = (WebView) findViewById(R.id.webView);
 			webView.getSettings().setJavaScriptEnabled(true);
 			webView.setWebViewClient(new WebViewClient(){
 				@Override
 				public boolean shouldOverrideUrlLoading(WebView view, String url) {
 					try {
-						if (url.contains("localhost")) {
+						if (url.contains("1.1.1.1")) {
 							String sso = url.split("sso=")[1];
-							webView.loadData(SSO.verifySSO(sso).toString(), "application/json", "UTF-8");
+							Log.d("SSO Token",sso);
+							webView.loadUrl("https://iodine.tjhsst.edu/ajax/sso/valid_key?sso="+sso);
 							return true;
 						}
 					} catch (Exception e) {return false;}
@@ -37,7 +40,7 @@ public class MainActivity extends ActionBarActivity {
 				}
 			});
 			webView.loadUrl(url);
-		} catch (Exception e) {}
+		} catch (Exception e) {Log.d("Exception",e.toString());}
 	}
 
 	@Override
