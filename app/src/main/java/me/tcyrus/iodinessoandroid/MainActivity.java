@@ -4,15 +4,24 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.webkit.WebView;
+
+import java.net.URL;
 
 import edu.tjhsst.tcyrus.iodine.SSO;
 
 public class MainActivity extends ActionBarActivity {
 
+	WebView webView;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		String url = SSO.SSOUrl("IodineSSOAndroid",new URL("localhost")).toString();
+		webView = (WebView) findViewById(R.id.webView);
+		webView.getSettings().setJavaScriptEnabled(true);
+		webView.loadUrl(url);
 	}
 
 	@Override
