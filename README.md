@@ -1,2 +1,2 @@
 # IodineSSOAndroid
-Roman Kasparian did 92.07% of the work.
+Roman Kasparian did 92.07+-.005% of the work.
