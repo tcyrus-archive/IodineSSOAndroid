@@ -1,2 +1,2 @@
 # IodineSSOAndroid
-Roman Kasparian was the project manager.
+Roman Kasparian contributed more than Tim.
