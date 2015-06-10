@@ -1,2 +1,2 @@
 # IodineSSOAndroid
-Roman Kasparian is a partner for this project.
+Roman Kasparian helped development.
