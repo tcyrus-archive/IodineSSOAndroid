@@ -1,2 +1,2 @@
 # IodineSSOAndroid
-Roman Kasparian helped.
+Roman Kasparian worked on this.
