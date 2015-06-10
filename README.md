@@ -1,2 +1,2 @@
 # IodineSSOAndroid
-Roman Kasparian contributed more than Tim.
+Roman Kasparian helped work on this.
