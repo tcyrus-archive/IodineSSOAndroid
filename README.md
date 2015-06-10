@@ -1,2 +1,2 @@
 # IodineSSOAndroid
-Roman Kasparian helped development.
+Roman Kasparian did a good portion of the work.
